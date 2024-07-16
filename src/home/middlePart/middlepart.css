@@ -1,0 +1,62 @@
+.middlePartDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleHeading {
+  width: 500px;
+  font-size: 3.5rem;
+}
+
+.titleParaText {
+  color: #7f7f7f;
+  margin-top: 10px;
+}
+
+.buttonsDiv {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrapbookButton {
+  background: #ffffff;
+  width: 140px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-family: "Poppins", sans-serif;
+  color: black;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  outline: none;
+}
+.scrapbookButton:hover {
+  background-color: #dedede;
+}
+
+.knowMoreButton {
+  background: #ffffff;
+  width: 140px;
+  padding-left: 12px;
+  margin-left: 8px;
+  padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  font-family: "Poppins", sans-serif;
+  color: black;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  outline: none;
+}
+.knowMoreButton:hover {
+  background-color: #dedede;
+}

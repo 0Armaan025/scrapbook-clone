@@ -60,3 +60,43 @@
 .knowMoreButton:hover {
   background-color: #dedede;
 }
+
+.featuresDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10pxq;
+  align-items: center;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+  justify-content: start;
+  align-items: center;
+  background: white;
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+}
+
+.feature:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.feature img {
+  margin-top: 4px;
+  width: 120px;
+  margin-bottom: 8px;
+}
+
+.featurePara {
+  width: 300px;
+  font-size: 14px;
+  padding: 6px;
+  text-align: start;
+  color: black;
+}

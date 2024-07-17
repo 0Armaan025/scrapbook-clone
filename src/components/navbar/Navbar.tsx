@@ -1,10 +1,13 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
   return (
     <div className=" text-white p-4 flex justify-between items-center">
       <div className="flex items-center" style={{ fontFamily: "Poppins" }}>
-        <span className="text-xl font-bold">Scrapbook</span>
+        <Link href="/">
+          <span className="text-xl font-bold">Scrapbook</span>
+        </Link>
       </div>
       <div className="flex-grow text-center"></div>
       <div>

@@ -16,9 +16,36 @@ const ScrapbookPage = (props: Props) => {
         >
           Public Scrapbook
         </h4>
-        <br/>
+        <br />
+        <div className="uploadBtnDiv flex flex-row justify-end items-end">
+          <input
+            type="button"
+            value="Upload project!"
+            className="px-4 py-2 border-2 border-white rounded-md bg-transparent text-white hover:bg-white hover:text-black transition-all cursor-pointer"
+            style={{ fontFamily: "poppins" }}
+          />
+        </div>
+        <br />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 m-2">
+          <ScrapbookComponent
+            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+            text="some text right here"
+          />
+          <ScrapbookComponent
+            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+            text="some text right here"
+          />
+          <ScrapbookComponent
+            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+            text="some text right here"
+          />
+          <ScrapbookComponent
+            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+            text="some text right here"
+          />
 
-        <ScrapbookComponent/>
+          {/* Add more ScrapbookComponent items as needed */}
+        </div>
       </div>
     </>
   );

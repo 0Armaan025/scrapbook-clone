@@ -37,9 +37,14 @@ const UploadProject = (props: Props) => {
             className="mx-2 w-[95%] px-2 h-40 py-1 rounded-sm outline-none mt-2"
             placeholder="Your Project details."
           />
-          <center>
-            
-          </center>
+
+          <input
+            type="button"
+            value="Upload!"
+            className="px-4 bg-transparent border-white border-2 mt-2  py-1 w-[95%] text-white rounded-sm cursor-pointer hover:bg-white hover:text-black transition-all  mx-2"
+            style={{ fontFamily: "Poppins" }}
+          />
+
           <br />
         </div>
       </div>

@@ -1,13 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import formidable from "formidable";
+import { fileConsumer } from "@/storage/formidable";
 import { app, db } from "../../../firebase/clientApp";
-import {
-  formidableConfig,
-  formidablePromise,
-  fileConsumer,
-} from "@/storage/formidable";
+
+const formidableConfig = {
+  keepExtensions: true,
+  maxFileSize: 5 * 1024 * 1024, // 5 MB
+};
+
+const formidablePromise = (req: NextApiRequest, opts: any) => {
+  return new Promise((resolve, reject) => {
+    const form = formidable(opts);
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve({ fields, files });
+    });
+  });
+};
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   return await fileGET(req, res);
@@ -16,10 +30,10 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 async function filePOST(request: NextApiRequest, res: NextApiResponse) {
   const storage = getStorage(app);
   const chunks: never[] = [];
-  const { fields, files } = await formidablePromise(request, {
+  const { fields, files } = (await formidablePromise(request, {
     ...formidableConfig,
     fileWriteStreamHandler: () => fileConsumer(chunks),
-  });
+  })) as { fields: any; files: any };
   const file = files.file;
   const fileBuffer = Buffer.concat(chunks);
   if (!file || !file[0]) {
@@ -29,6 +43,29 @@ async function filePOST(request: NextApiRequest, res: NextApiResponse) {
     return res
       .status(400)
       .json({ error: "File size exceeds the limit of 5 MB." });
+  }
+
+  try {
+    const fileId = uuidv4();
+    const storageRef = ref(
+      storage,
+      `uploads/${fileId}/${file[0].originalFilename}`
+    );
+    const { metadata } = await uploadBytes(storageRef, fileBuffer);
+    const { fullPath } = metadata;
+    if (!fullPath) {
+      return res.status(403).json({
+        error: "There was some error while uploading the file.",
+      });
+    }
+    const fileURL = await getDownloadURL(storageRef);
+    console.log(fileURL);
+
+    return res.status(200).json({ message: "Uploaded Successfully", fileURL });
+  } catch (e: any) {
+    const tmp = e.message || e.toString();
+    console.log(tmp);
+    return res.status(500).send(tmp);
   }
 }
 

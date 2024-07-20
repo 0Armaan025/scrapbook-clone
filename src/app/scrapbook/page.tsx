@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar/Navbar";
 import React from "react";
 import "./scrapbookpage.css";
 import ScrapbookComponent from "@/components/scrapbook-component/ScrapBookComponent";
+import Link from "next/link";
 
 type Props = {};
 
@@ -18,12 +19,14 @@ const ScrapbookPage = (props: Props) => {
         </h4>
         <br />
         <div className="uploadBtnDiv flex flex-row justify-end items-end">
-          <input
-            type="button"
-            value="Upload project!"
-            className="px-4 py-2 border-2 border-white rounded-md bg-transparent text-white hover:bg-white hover:text-black transition-all cursor-pointer"
-            style={{ fontFamily: "poppins" }}
-          />
+          <Link href="/upload-project">
+            <input
+              type="button"
+              value="Upload project!"
+              className="px-4 py-2 border-2 border-white rounded-md bg-transparent text-white hover:bg-white hover:text-black transition-all cursor-pointer"
+              style={{ fontFamily: "poppins" }}
+            />
+          </Link>
         </div>
         <br />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 m-2">

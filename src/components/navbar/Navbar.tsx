@@ -11,12 +11,14 @@ const Navbar = () => {
       </div>
       <div className="flex-grow text-center"></div>
       <div>
-        <button
-          className="bg-transparent hover:bg-white text-white hover:text-black border-[.5px] border-white transition-all py-2 px-4 rounded-3xl"
-          style={{ fontFamily: "Poppins" }}
-        >
-          Scrapbook
-        </button>
+        <Link href="/scrapbook">
+          <button
+            className="bg-transparent hover:bg-white text-white hover:text-black border-[.5px] border-white transition-all py-2 px-4 rounded-3xl"
+            style={{ fontFamily: "Poppins" }}
+          >
+            Scrapbook
+          </button>
+        </Link>
       </div>
     </div>
   );

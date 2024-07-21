@@ -3,6 +3,7 @@ import React from "react";
 type Props = {
   imageUrl: string;
   text: string;
+  projectLink: string;
 };
 
 const ScrapbookComponent = (props: Props) => {
@@ -19,11 +20,13 @@ const ScrapbookComponent = (props: Props) => {
       >
         {props.text}
       </p>
-      <input
-        type="button"
-        className="w-full text-center bg-[#0f323e] px-4 py-2 border-2 border-white mt-2 rounded-md hover:bg-white hover:text-black transition-all cursor-pointer hover:border-black hover:border-2 text-white "
-        value="Check it out!"
-      />
+      <a href={props.projectLink} target="_blank">
+        <input
+          type="button"
+          className="w-full text-center bg-[#0f323e] px-4 py-2 border-2 border-white mt-2 rounded-md hover:bg-white hover:text-black transition-all cursor-pointer hover:border-black hover:border-2 text-white "
+          value="Check it out!"
+        />
+      </a>
     </div>
   );
 };

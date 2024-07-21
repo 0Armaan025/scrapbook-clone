@@ -1,12 +1,41 @@
+"use client";
 import Navbar from "@/components/navbar/Navbar";
-import React from "react";
-import "./scrapbookpage.css";
+import React, { useState, useEffect } from "react";
+import { db } from "../../firebase/clientApp";
+import { collection, getDocs } from "firebase/firestore";
 import ScrapbookComponent from "@/components/scrapbook-component/ScrapBookComponent";
 import Link from "next/link";
+import "./scrapbookpage.css";
 
-type Props = {};
+type Project = {
+  name: string;
+  projectDetails: string;
+  imageUrl: string;
+  projectLink: string;
+};
 
-const ScrapbookPage = (props: Props) => {
+const ScrapbookPage = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "data"));
+        const projectsData: Project[] = querySnapshot.docs.map((doc) => ({
+          name: doc.data().name,
+          projectDetails: doc.data().projectDetails,
+          imageUrl: doc.data().imageUrl,
+          projectLink: doc.data().projectLink,
+        }));
+        setProjects(projectsData);
+      } catch (error) {
+        console.error("Error fetching projects: ", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -30,24 +59,14 @@ const ScrapbookPage = (props: Props) => {
         </div>
         <br />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 m-2">
-          <ScrapbookComponent
-            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            text="some text right here"
-          />
-          <ScrapbookComponent
-            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            text="some text right here"
-          />
-          <ScrapbookComponent
-            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            text="some text right here"
-          />
-          <ScrapbookComponent
-            imageUrl="https://plus.unsplash.com/premium_photo-1721143362948-7929f10d5e4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            text="some text right here"
-          />
-
-          {/* Add more ScrapbookComponent items as needed */}
+          {projects.map((project, index) => (
+            <ScrapbookComponent
+              key={index}
+              imageUrl={project.imageUrl}
+              text={`${project.projectDetails.substring(0, 20)}...`}
+              projectLink={project.projectLink}
+            />
+          ))}
         </div>
       </div>
     </>

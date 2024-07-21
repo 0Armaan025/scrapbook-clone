@@ -1,5 +1,6 @@
 import React from "react";
 import "./middlepart.css";
+import Link from "next/link";
 
 type Props = {};
 
@@ -16,11 +17,13 @@ const MiddlePart = (props: Props) => {
         </p>
 
         <div className="buttonsDiv mb-8">
-          <input
-            type="button"
-            value="Scrapbook"
-            className="scrapbookButton bg-green-500 text-white py-2 px-4 rounded-lg mx-2 hover:bg-green-600 transition duration-300"
-          />
+          <Link href="/scrapbook">
+            <input
+              type="button"
+              value="Scrapbook"
+              className="scrapbookButton bg-green-500 text-white py-2 px-4 rounded-lg mx-2 hover:bg-green-600 transition duration-300"
+            />
+          </Link>
           <input
             type="button"
             value="Know more!"
